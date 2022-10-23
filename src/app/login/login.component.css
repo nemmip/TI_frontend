@@ -1,0 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap");
+h1,
+h4 {
+  font-family: "Abril Fatface";
+  font-weight: bold;
+}
+/* h4 {
+  font-weight: 200;
+  padding-bottom: 2%;
+  padding-top: 10%;
+}
+hr {
+  margin-top: 12%;
+} */
