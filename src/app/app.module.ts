@@ -10,6 +10,9 @@ import { GraphQLModule } from '../gql/graphql.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { CookieService } from 'ngx-cookie-service';
+import { SavedContactsComponent } from './saved-contacts/saved-contacts.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +20,8 @@ import { RegisterComponent } from './register/register.component';
     LoginComponent,
     JoinBySessionComponent,
     RegisterComponent,
+    DashboardComponent,
+    SavedContactsComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,7 +31,7 @@ import { RegisterComponent } from './register/register.component';
     GraphQLModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
 import { AuthLoginInput } from 'src/gql/gql.inputs';
 import { LOGIN_WITH_EMAIL_MUTATION } from 'src/gql/gql.mutations';
+import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,8 @@ export class LoginComponent implements OnInit {
     email: '',
     password: '',
   };
-  constructor(private apollo: Apollo) {}
+  token?: string = undefined;
+  constructor(private apollo: Apollo, private readonly router: Router) {}
 
   loginWithEmail() {
     this.apollo
@@ -24,7 +26,11 @@ export class LoginComponent implements OnInit {
           input: this.credentials,
         },
       })
-      .subscribe(({ data }) => console.log(data));
+      .subscribe(({ data }) => {
+        const tokenData = data as { createLoginSession: string };
+        localStorage.setItem('authorization', tokenData.createLoginSession);
+        this.router.navigate(['dashboard']);
+      });
   }
 
   ngOnInit(): void {}

@@ -8,3 +8,8 @@ export type UserCreateInput = {
   name: string;
   password: string;
 };
+
+export type Contact = {
+  uuid: string;
+  name: string;
+};
