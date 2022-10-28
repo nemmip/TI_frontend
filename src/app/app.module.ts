@@ -13,6 +13,10 @@ import { RegisterComponent } from './register/register.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CookieService } from 'ngx-cookie-service';
 import { SavedContactsComponent } from './saved-contacts/saved-contacts.component';
+import { PartyComponent } from './party/party.component';
+import { UserGroupsComponent } from './user-groups/user-groups.component';
+import { UsersBillsComponent } from './users-bills/users-bills.component';
+import { GroupDashboardComponent } from './group-dashboard/group-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +26,10 @@ import { SavedContactsComponent } from './saved-contacts/saved-contacts.componen
     RegisterComponent,
     DashboardComponent,
     SavedContactsComponent,
+    PartyComponent,
+    UserGroupsComponent,
+    UsersBillsComponent,
+    GroupDashboardComponent,
   ],
   imports: [
     BrowserModule,

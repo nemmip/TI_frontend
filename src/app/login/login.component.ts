@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
       .subscribe(({ data }) => {
         const tokenData = data as { createLoginSession: string };
         localStorage.setItem('authorization', tokenData.createLoginSession);
-        this.router.navigate(['dashboard']);
+        setTimeout(() => this.router.navigate(['dashboard']), 2000);
       });
   }
 

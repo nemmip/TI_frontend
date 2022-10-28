@@ -14,7 +14,6 @@ export class AuthService {
     const token = localStorage.getItem('authorization');
     try {
       const payload = atob(token?.split('.')[1] ?? '');
-      console.log(payload, token);
       const parsedPayload = JSON.parse(payload);
       const lessThan15 =
         parsedPayload.exp - new Date().getMilliseconds() <= FIFTEEN_MINUTES;

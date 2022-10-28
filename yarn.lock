@@ -130,6 +130,15 @@
   dependencies:
     "tslib" "^2.3.0"
 
+"@angular/cdk@^14.2.6":
+  "integrity" "sha512-sihrwk/0emYbE2X+DOIlan7mohED9pKiH2gQh2hk3Ud8jjeW6VmbaGtTCkjs+HRbFc9/44uDHasizxrKnjseyw=="
+  "resolved" "https://registry.npmjs.org/@angular/cdk/-/cdk-14.2.6.tgz"
+  "version" "14.2.6"
+  dependencies:
+    "tslib" "^2.3.0"
+  optionalDependencies:
+    "parse5" "^5.0.0"
+
 "@angular/cli@~14.2.6":
   "integrity" "sha512-8tXpe3htfZY8a+Am4nluVcztMFD5wnx4edGEDkkOiqkrUzbCtX4AyEBjUFldsYKZXbRFU46xEfM6jBnLOjxDZQ=="
   "resolved" "https://registry.npmjs.org/@angular/cli/-/cli-14.2.6.tgz"
@@ -156,7 +165,7 @@
     "uuid" "8.3.2"
     "yargs" "17.5.1"
 
-"@angular/common@^14.0.0", "@angular/common@^14.1.0", "@angular/common@^14.2.0", "@angular/common@14.2.7":
+"@angular/common@^14.0.0", "@angular/common@^14.0.0 || ^15.0.0", "@angular/common@^14.1.0", "@angular/common@^14.2.0", "@angular/common@14.2.7":
   "integrity" "sha512-vfydeB8urLzhRnZev/1Zm87k9jWlNfhSTk09yUnqvzcORfd3xOkcei0qc1xdIHCTEMyTREC+umsYHDmlEpZsVw=="
   "resolved" "https://registry.npmjs.org/@angular/common/-/common-14.2.7.tgz"
   "version" "14.2.7"
@@ -186,7 +195,7 @@
   dependencies:
     "tslib" "^2.3.0"
 
-"@angular/core@^14.0.0", "@angular/core@^14.1.0", "@angular/core@^14.2.0", "@angular/core@14.2.7":
+"@angular/core@^14.0.0", "@angular/core@^14.0.0 || ^15.0.0", "@angular/core@^14.1.0", "@angular/core@^14.2.0", "@angular/core@14.2.7":
   "integrity" "sha512-9u2eeKS90YPh2b0pK5LKFSxKfLIzHnzkIKQFh6bEPGj43Fl2v8CwiVJu1CAKo1Or4qBY8zspSowM6S1kgGwfeg=="
   "resolved" "https://registry.npmjs.org/@angular/core/-/core-14.2.7.tgz"
   "version" "14.2.7"
@@ -4830,6 +4839,11 @@
   "version" "6.0.1"
   dependencies:
     "parse5" "^6.0.1"
+
+"parse5@^5.0.0":
+  "integrity" "sha512-ugq4DFI0Ptb+WWjAdOK16+u/nHfiIrcE+sh8kZMaM0WllQKLI9rOUq6c2b7cwPkXdzfQESqvoqK6ug7U/Yyzug=="
+  "resolved" "https://registry.npmjs.org/parse5/-/parse5-5.1.1.tgz"
+  "version" "5.1.1"
 
 "parse5@^6.0.1":
   "integrity" "sha512-Ofn/CTFzRGTTxwpNEs9PP93gXShHcTq255nzRYSKe8AkVpZY7e1fpmTfOyoIvjP5HG7Z2ZM7VS9PPhQGW2pOpw=="

@@ -39,8 +39,8 @@ export class SavedContactsComponent implements OnInit {
           input: uuid,
         },
       })
-      .subscribe(async () => {
-        await this.getContactsForUser();
+      .subscribe(() => {
+        this.getContactsForUser();
         this.router
           .navigateByUrl('/', { skipLocationChange: true })
           .then(() => {
@@ -59,7 +59,7 @@ export class SavedContactsComponent implements OnInit {
       })
       .subscribe(async () => {
         this.myModal?.hide();
-        await this.getContactsForUser();
+        this.getContactsForUser();
         this.router
           .navigateByUrl('/', { skipLocationChange: true })
           .then(() => {
