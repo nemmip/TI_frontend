@@ -1,119 +1,85 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Apollo } from 'apollo-angular';
-import { BillCreateInput, Contact, Group, User } from 'src/gql/gql.inputs';
+import { Component, OnInit } from '@angular/core'
+import { Apollo } from 'apollo-angular'
 import {
-  ADD_GROUP_MEMBER,
-  CREATE_BILL,
-  GET_GROUP_DETAILS,
-  GET_GROUP_MEMBERS,
-  GET_USER_CONTACTS,
-  ME_QUERY,
-} from 'src/gql/gql.mutations';
-import { Clipboard } from '@angular/cdk/clipboard';
-import * as bootstrap from 'bootstrap';
+	Bill,
+	Contact,
+	GroupSummary,
+	SplitSummary,
+	User,
+} from 'src/gql/gql.inputs'
+import {
+	GET_GROUP_SUMMARY,
+	GET_USER_CONTACTS,
+	SPLIT_GROUP,
+} from 'src/gql/gql.mutations'
+import * as bootstrap from 'bootstrap'
 
 @Component({
-  selector: 'app-group-dashboard',
-  templateUrl: './group-dashboard.component.html',
-  styleUrls: ['./group-dashboard.component.css'],
+	selector: 'app-group-dashboard',
+	templateUrl: './group-dashboard.component.html',
+	styleUrls: ['./group-dashboard.component.css'],
 })
 export class GroupDashboardComponent implements OnInit {
-  constructor(private readonly apollo: Apollo, private clipboard: Clipboard) {}
-  owner?: User;
-  group?: Group;
-  members?: User[] = undefined;
-  htmAddContactlModal = document.getElementById('addContactModal');
-  addContactModal = this.htmAddContactlModal
-    ? new bootstrap.Modal(this.htmAddContactlModal)
-    : null;
+	constructor(private readonly apollo: Apollo) {}
+	groupSummary?: GroupSummary
+	splitSummary?: SplitSummary[]
+	owner?: User
+	contacts?: Contact[] = undefined
+	membersBills: Bill[] = []
+	htmSplitModal = document.getElementById('splitModal')
+	splitModal = this.htmSplitModal
+		? new bootstrap.Modal(this.htmSplitModal)
+		: null
 
-  contacts?: Contact[] = undefined;
-  contactToAdd?: string = undefined;
-  htmAddBilllModal = document.getElementById('addBillModal');
-  addBillModal = this.htmAddBilllModal
-    ? new bootstrap.Modal(this.htmAddBilllModal)
-    : null;
-  bill: BillCreateInput = {
-    name: '',
-    price: 0,
-  };
-  getGroupDetails() {
-    this.apollo
-      .query({
-        query: GET_GROUP_DETAILS,
-      })
-      .subscribe(({ data }) => {
-        const receivedData = data as { partyGroupDetails: Group };
-        this.group = receivedData.partyGroupDetails;
-      });
-  }
+	getUserContacts() {
+		this.apollo
+			.mutate({
+				mutation: GET_USER_CONTACTS,
+			})
+			.subscribe(({ data }) => {
+				const membersUuids = this.groupSummary?.billsSummary.map(
+					(bill) => bill.member.uuid
+				)
 
-  getGroupMembers() {
-    this.apollo
-      .mutate({
-        mutation: GET_GROUP_MEMBERS,
-      })
-      .subscribe(({ data }) => {
-        const received = data as { partyGroupMembers: User[] };
-        this.members = received.partyGroupMembers;
-        console.log(this.members[0].bills);
-      });
-  }
+				if (membersUuids) {
+					const contactData = data as { contactsGetByUser: Contact[] }
+					this.contacts = contactData.contactsGetByUser.filter(
+						(contact) => !membersUuids.find((member) => member === contact.uuid)
+					)
+				}
+			})
+	}
 
-  getUserContacts() {
-    this.apollo
-      .mutate({
-        mutation: GET_USER_CONTACTS,
-      })
-      .subscribe(({ data }) => {
-        const membersUuids = this.members?.map((m) => m.uuid);
-        const contactData = data as { contactsGetByUser: Contact[] };
-        this.contacts = contactData.contactsGetByUser.filter(
-          (contact) => !membersUuids?.find((m) => m === contact.uuid)
-        );
-      });
-  }
+	getGroupSummary() {
+		this.apollo
+			.query({
+				query: GET_GROUP_SUMMARY,
+			})
+			.subscribe(({ data }) => {
+				const receivedData = data as { partyGroupSummary: GroupSummary }
+				this.groupSummary = receivedData.partyGroupSummary
+				this.getUserContacts()
+			})
+	}
 
-  copyCode() {
-    this.clipboard.copy(this.group?.code ?? '');
-  }
+	getSplitSummary() {
+		this.apollo
+			.query({
+				query: SPLIT_GROUP,
+			})
+			.subscribe(({ data }) => {
+				const receivedData = data as { splitPartyGroup: SplitSummary[] }
+				this.splitSummary = receivedData.splitPartyGroup
+				console.log(data)
+			})
+	}
 
-  addContact() {
-    this.apollo
-      .mutate({
-        mutation: ADD_GROUP_MEMBER,
-        variables: {
-          input: this.contactToAdd,
-        },
-      })
-      .subscribe(() => {
-        this.contactToAdd = undefined;
-        this.ngOnInit();
-      });
-  }
+	makeAbs(num: number) {
+		return Math.abs(num).toFixed(2)
+	}
 
-  addNewBill() {
-    this.apollo
-      .mutate({
-        mutation: CREATE_BILL,
-        variables: {
-          input: this.bill,
-        },
-      })
-      .subscribe(() => this.ngOnInit());
-  }
-
-  resolvePaysOnUser(uuid: string) {
-    const member = this.members?.find((m) => m.uuid === uuid);
-    const payed = member?.bills
-      ?.filter((b) => b.groupUuid === this.group?.uuid)
-      .map((b) => b.price);
-    return payed?.reduce((a, b) => a + b);
-  }
-
-  ngOnInit(): void {
-    this.getGroupDetails();
-    this.getGroupMembers();
-    this.getUserContacts();
-  }
+	ngOnInit(): void {
+		this.getGroupSummary()
+		this.getSplitSummary()
+	}
 }

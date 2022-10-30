@@ -1,0 +1,90 @@
+<div class="col text-center">
+	<div
+		class="card mb-3"
+		style="
+			max-width: 30rem;
+			min-width: 15rem;
+			background-color: #e0b4e4;
+			min-height: 20rem;
+		"
+	>
+		<div class="card-header">
+			<h4 style="color: whitesmoke">Your bills</h4>
+		</div>
+		<div class="card-body">
+			<div class="row">
+				<div class="col">
+					<h5>Name</h5>
+				</div>
+				<div class="col">
+					<h5>Cost</h5>
+				</div>
+				<hr />
+			</div>
+			<div class="row" *ngFor="let bill of userBills">
+				<div class="col">
+					<h5>{{ bill.name }}</h5>
+				</div>
+				<div class="col">{{ bill.price }} {{ currency }}</div>
+			</div>
+		</div>
+		<div class="card-footer">
+			<div class="d-grid gap-2">
+				<button
+					class="btn btn-warning btn-lg btn-block"
+					data-bs-toggle="modal"
+					data-bs-target="#addBillModal"
+				>
+					Add new bill
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Bill Modal -->
+<div
+	class="modal fade"
+	id="addBillModal"
+	tabindex="-1"
+	aria-labelledby="addBillModalLabel"
+	aria-hidden="true"
+>
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="addBillModalLabel">Add new bill</h1>
+				<button
+					type="button"
+					class="btn-close"
+					data-bs-dismiss="modal"
+					aria-label="Close"
+				></button>
+			</div>
+			<div class="modal-body">
+				<label for="addBillName" class="form-label">Bill title</label>
+				<input
+					type="text"
+					class="form-control"
+					placeholder="Lunch in restaurant"
+					[(ngModel)]="bill.name"
+				/>
+				<label for="addBillPrice" class="form-label">Price</label>
+				<input type="number" class="form-control" [(ngModel)]="bill.price" />
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+					Close
+				</button>
+				<button
+					type="button"
+					class="btn btn-dark"
+					data-bs-dismiss="modal"
+					(click)="addNewBill()"
+				>
+					Add
+				</button>
+			</div>
+		</div>
+	</div>
+</div>

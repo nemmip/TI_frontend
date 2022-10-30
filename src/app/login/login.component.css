@@ -1,10 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap");
 h1,
 h4 {
-  font-family: "Abril Fatface";
-  font-weight: bold;
-  color: #69385c;
+	font-family: "Abril Fatface";
+	font-weight: bold;
+	color: #69385c;
 }
 h4 {
-  color: black;
+	color: black;
 }

@@ -1,21 +1,29 @@
 <div class="row">
-  <h4 class="text-center pb-3 pt-2">Join existing session</h4>
-  <div class="mb-3">
-    <label for="exampleFormControlInput1" class="form-label">Your name</label>
-    <input
-      type="name"
-      class="form-control"
-      id="exampleFormControlInput1"
-      placeholder="John Doe"
-    />
-  </div>
-  <div class="mb-3">
-    <label for="exampleFormControlInput1" class="form-label"
-      >Session invite code</label
-    >
-    <input type="number" class="form-control" id="exampleFormControlInput1" />
-  </div>
-  <div class="d-grid gap-2">
-    <button class="btn btn-dark" type="button">Join splitting!</button>
-  </div>
+	<h4 class="text-center pb-3 pt-2">Join existing session</h4>
+	<div class="mb-3">
+		<label for="exampleFormControlInput1" class="form-label">Your name</label>
+		<input
+			type="name"
+			class="form-control"
+			id="exampleFormControlInput1"
+			placeholder="John Doe"
+			[(ngModel)]="loginGroupInput.name"
+		/>
+	</div>
+	<div class="mb-3">
+		<label for="exampleFormControlInput1" class="form-label"
+			>Session invite code</label
+		>
+		<input
+			type="text"
+			class="form-control"
+			id="exampleFormControlInput1"
+			[(ngModel)]="loginGroupInput.code"
+		/>
+	</div>
+	<div class="d-grid gap-2">
+		<button class="btn btn-dark" type="button" (click)="joinNewGroup()">
+			Join splitting!
+		</button>
+	</div>
 </div>

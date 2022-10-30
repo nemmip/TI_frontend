@@ -1,0 +1,84 @@
+<div class="row text-center" style="max-height: 10rem">
+	<h3>Would you like to invite someone else?</h3>
+	<div class="row pt-3">
+		<div class="col pt-3">
+			<button
+				class="btn btn-outline-dark"
+				data-bs-toggle="modal"
+				data-bs-target="#addContactModal"
+			>
+				<h4 class="bi bi-person-plus-fill"></h4>
+				<h5>Add from your contacts</h5>
+			</button>
+		</div>
+		<div class="col">
+			<h4>Copy & send invitation code!</h4>
+			<div class="input-group mb-3">
+				<input
+					type="text"
+					class="form-control"
+					disabled="true"
+					aria-label="Recipient's username"
+					aria-describedby="basic-addon2"
+					value="{{ groupCode }}"
+				/>
+				<span
+					class="input-group-text bi bi-clipboard-heart-fill copySpan"
+					id="basic-addon2"
+					(click)="copyCode()"
+				></span>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Modal -->
+<div
+	class="modal fade"
+	id="addContactModal"
+	tabindex="-1"
+	aria-labelledby="addContactModalLabel"
+	aria-hidden="true"
+>
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="addContactModalLabel">
+					Add someone you know
+				</h1>
+				<button
+					type="button"
+					class="btn-close"
+					data-bs-dismiss="modal"
+					aria-label="Close"
+				></button>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<select
+						class="form-select"
+						aria-label="Default select example"
+						[(ngModel)]="contactToAdd"
+					>
+						<option *ngFor="let contact of contacts" value="{{ contact.uuid }}">
+							{{ contact.name }}
+						</option>
+					</select>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+					Close
+				</button>
+				<button
+					type="button"
+					class="btn btn-dark"
+					data-bs-dismiss="modal"
+					(click)="addContact()"
+				>
+					Add
+				</button>
+			</div>
+		</div>
+	</div>
+</div>

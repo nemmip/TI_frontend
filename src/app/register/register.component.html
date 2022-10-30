@@ -1,61 +1,61 @@
 <a routerLink="register"></a>
 <div class="mx-auto" style="width: 400px" *ngIf="!isRegistred">
-  <div class="container">
-    <h1 class="text-center">Wanna join us?</h1>
-    <div class="row">
-      <h4 class="text-center pb-3 pt-2">Tell something about yourself!</h4>
-      <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Name</label>
-        <input
-          type="text"
-          class="form-control"
-          placeholder="John Doe"
-          [(ngModel)]="registerInput.name"
-        />
-      </div>
-      <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label"
-          >Email address</label
-        >
-        <input
-          type="email"
-          class="form-control"
-          placeholder="name@example.com"
-          [(ngModel)]="registerInput.email"
-        />
-      </div>
-      <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label"
-          >Password</label
-        >
-        <input
-          type="password"
-          class="form-control"
-          [(ngModel)]="registerInput.password"
-        />
-      </div>
-      <div class="d-grid gap-2">
-        <button class="btn btn-dark" type="button" (click)="registerUser()">
-          Start splitting!
-        </button>
-      </div>
-    </div>
-    <hr class="mt-4" />
-  </div>
+	<div class="container">
+		<h1 class="text-center">Wanna join us?</h1>
+		<div class="row">
+			<h4 class="text-center pb-3 pt-2">Tell something about yourself!</h4>
+			<div class="mb-3">
+				<label for="exampleFormControlInput1" class="form-label">Name</label>
+				<input
+					type="text"
+					class="form-control"
+					placeholder="John Doe"
+					[(ngModel)]="registerInput.name"
+				/>
+			</div>
+			<div class="mb-3">
+				<label for="exampleFormControlInput1" class="form-label"
+					>Email address</label
+				>
+				<input
+					type="email"
+					class="form-control"
+					placeholder="name@example.com"
+					[(ngModel)]="registerInput.email"
+				/>
+			</div>
+			<div class="mb-3">
+				<label for="exampleFormControlInput1" class="form-label"
+					>Password</label
+				>
+				<input
+					type="password"
+					class="form-control"
+					[(ngModel)]="registerInput.password"
+				/>
+			</div>
+			<div class="d-grid gap-2">
+				<button class="btn btn-dark" type="button" (click)="registerUser()">
+					Start splitting!
+				</button>
+			</div>
+		</div>
+		<hr class="mt-4" />
+	</div>
 </div>
 
 <div class="mx-auto" style="width: 500px" *ngIf="isRegistred">
-  <div class="container">
-    <h1 class="text-center">Thank you for joining us!</h1>
-    <div class="row">
-      <h4 class="text-center pb-3 pt-2" style="font-weight: 100">
-        Nice to meet you {{ registerInput.name }}, you can now login in
-      </h4>
-      <div class="d-grid gap-2">
-        <button class="btn btn-secondary mt-5" type="button" routerLink="/">
-          Go to login page!
-        </button>
-      </div>
-    </div>
-  </div>
+	<div class="container">
+		<h1 class="text-center">Thank you for joining us!</h1>
+		<div class="row">
+			<h4 class="text-center pb-3 pt-2" style="font-weight: 100">
+				Nice to meet you {{ registerInput.name }}, you can now login in
+			</h4>
+			<div class="d-grid gap-2">
+				<button class="btn btn-secondary mt-5" type="button" routerLink="/">
+					Go to login page!
+				</button>
+			</div>
+		</div>
+	</div>
 </div>

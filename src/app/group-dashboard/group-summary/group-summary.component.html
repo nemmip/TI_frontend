@@ -1,0 +1,47 @@
+<div
+	class="card mb-3"
+	style="
+		max-width: 30rem;
+		min-width: 15rem;
+		background-color: #e0b4e4;
+		min-height: 20rem;
+	"
+>
+	<div class="card-header">
+		<h4 style="color: whitesmoke">
+			Welcome in {{ groupSummary?.group?.name }} group!
+		</h4>
+	</div>
+	<div class="card-body text-center">
+		<div class="row">
+			<div class="col">
+				<h5>Name</h5>
+			</div>
+			<div class="col">
+				<h5>Payed</h5>
+			</div>
+			<hr />
+		</div>
+		<div class="row" *ngFor="let bill of groupSummary?.billsSummary">
+			<div class="col">
+				<h5>{{ bill.member.name }}</h5>
+			</div>
+			<div class="col">
+				{{ bill.sumOfBills }} {{ groupSummary?.group?.currency }}
+			</div>
+		</div>
+	</div>
+	<div class="card-footer text-center">
+		<div class="row">
+			<div class="col">
+				<h5>ALL</h5>
+			</div>
+			<div class="col">
+				<h5>
+					{{ getSumOfBills(groupSummary?.billsSummary) }}
+					{{ groupSummary?.group?.currency }}
+				</h5>
+			</div>
+		</div>
+	</div>
+</div>

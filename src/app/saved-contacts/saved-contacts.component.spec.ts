@@ -1,23 +1,22 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { SavedContactsComponent } from './saved-contacts.component';
+import { SavedContactsComponent } from './saved-contacts.component'
 
 describe('SavedContactsComponent', () => {
-  let component: SavedContactsComponent;
-  let fixture: ComponentFixture<SavedContactsComponent>;
+	let component: SavedContactsComponent
+	let fixture: ComponentFixture<SavedContactsComponent>
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ SavedContactsComponent ]
-    })
-    .compileComponents();
+	beforeEach(async () => {
+		await TestBed.configureTestingModule({
+			declarations: [SavedContactsComponent],
+		}).compileComponents()
 
-    fixture = TestBed.createComponent(SavedContactsComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+		fixture = TestBed.createComponent(SavedContactsComponent)
+		component = fixture.componentInstance
+		fixture.detectChanges()
+	})
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+	it('should create', () => {
+		expect(component).toBeTruthy()
+	})
+})

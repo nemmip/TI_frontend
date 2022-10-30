@@ -1,193 +1,76 @@
-<div class="container">
-  <div class="row">
-    <div class="col-3">
-      <div
-        class="card mb-3"
-        style="
-          max-width: 30rem;
-          min-width: 15rem;
-          background-color: #e0b4e4;
-          min-height: 20rem;
-        "
-      >
-        <div class="card-header">
-          <h4 style="color: whitesmoke">Welcome in {{ group?.name }} group!</h4>
-        </div>
-        <div class="card-body text-center">
-          <div class="row">
-            <div class="col">
-              <h5>Name</h5>
-            </div>
-            <div class="col">
-              <h5>Payed</h5>
-            </div>
-            <hr />
-          </div>
-          <div class="row" *ngFor="let member of members">
-            <div class="col">
-              <h5>{{ member.name }}</h5>
-            </div>
-            <div class="col">
-              {{ resolvePaysOnUser(member.uuid) }} {{ group?.currency }}
-            </div>
-          </div>
-        </div>
-        <div class="card-footer text-center">
-          <div class="row">
-            <div class="col">
-              <h5>ALL</h5>
-            </div>
-            <div class="col">
-              <h5>0 {{ group?.currency }}</h5>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-7">
-      <div class="row text-center">
-        <h3>Would you like to invite someone else?</h3>
-        <div class="row pt-3">
-          <div class="col pt-3">
-            <button
-              class="btn btn-outline-dark"
-              data-bs-toggle="modal"
-              data-bs-target="#addContactModal"
-            >
-              <h4 class="bi bi-person-plus-fill"></h4>
-              <h5>Add from your contacts</h5>
-            </button>
-          </div>
-          <div class="col">
-            <h4>Copy & send invitation code!</h4>
-            <div class="input-group mb-3">
-              <input
-                type="text"
-                class="form-control"
-                disabled="true"
-                aria-label="Recipient's username"
-                aria-describedby="basic-addon2"
-                value="{{ group?.code }}"
-              />
-              <span
-                class="input-group-text bi bi-clipboard-heart-fill copySpan"
-                id="basic-addon2"
-                (click)="copyCode()"
-              ></span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col">SOMETHING WILL BE HERE</div>
-    <div class="col">
-      <button
-        class="btn btn-info"
-        data-bs-toggle="modal"
-        data-bs-target="#addBillModal"
-      >
-        Add new bill
-      </button>
-    </div>
-  </div>
-</div>
-
-<!-- Modal -->
-<div
-  class="modal fade"
-  id="addContactModal"
-  tabindex="-1"
-  aria-labelledby="addContactModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="addContactModalLabel">
-          Add someone you know
-        </h1>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-          <select
-            class="form-select"
-            aria-label="Default select example"
-            [(ngModel)]="contactToAdd"
-          >
-            <option *ngFor="let contact of contacts" value="{{ contact.uuid }}">
-              {{ contact.name }}
-            </option>
-          </select>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          Close
-        </button>
-        <button
-          type="button"
-          class="btn btn-dark"
-          data-bs-dismiss="modal"
-          (click)="addContact()"
-        >
-          Add
-        </button>
-      </div>
-    </div>
-  </div>
+<app-logout></app-logout>
+<div class="container pt-3">
+	<div class="row">
+		<div class="col-3">
+			<app-group-summary [groupSummary]="groupSummary"></app-group-summary>
+		</div>
+		<div class="col-6">
+			<div class="row p-3">
+				<app-group-invitation
+					[groupCode]="groupSummary?.group?.code"
+					[contacts]="contacts"
+				></app-group-invitation>
+			</div>
+			<div class="row p-3 mx-5">
+				<app-group-chart
+					class="m-3"
+					*ngIf="groupSummary"
+					[groupSummary]="groupSummary"
+				></app-group-chart>
+			</div>
+		</div>
+		<div class="col-3">
+			<app-user-group-bills
+				[currency]="groupSummary?.group?.currency"
+			></app-user-group-bills>
+		</div>
+	</div>
+	<div class="row">
+		<div class="d-grid gap-2">
+			<button
+				class="btn btn-dark"
+				type="button"
+				data-bs-toggle="modal"
+				data-bs-target="#splitModal"
+			>
+				Split group
+			</button>
+		</div>
+	</div>
 </div>
 
 <!-- Bill Modal -->
 <div
-  class="modal fade"
-  id="addBillModal"
-  tabindex="-1"
-  aria-labelledby="addBillModalLabel"
-  aria-hidden="true"
+	class="modal fade"
+	id="splitModal"
+	tabindex="-1"
+	aria-labelledby="splitModalLabel"
+	aria-hidden="true"
 >
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="addBillModalLabel">Add new bill</h1>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="modal-body">
-        <label for="addBillName" class="form-label">Bill title</label>
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Lunch in restaurant"
-          [(ngModel)]="bill.name"
-        />
-        <label for="addBillPrice" class="form-label">Price</label>
-        <input type="number" class="form-control" [(ngModel)]="bill.price" />
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          Close
-        </button>
-        <button
-          type="button"
-          class="btn btn-dark"
-          data-bs-dismiss="modal"
-          (click)="addNewBill()"
-        >
-          Add
-        </button>
-      </div>
-    </div>
-  </div>
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="splitModalLabel">
+					Group splitting summary
+				</h1>
+				<button
+					type="button"
+					class="btn-close"
+					data-bs-dismiss="modal"
+					aria-label="Close"
+				></button>
+			</div>
+			<div class="modal-body">
+				<p *ngFor="let split of splitSummary">
+					{{ split.name }} should {{ split.pay >= 0 ? "receive" : "pay" }}
+					{{ makeAbs(split.pay) }} {{ groupSummary?.group?.currency }}
+				</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+					Close
+				</button>
+			</div>
+		</div>
+	</div>
 </div>
