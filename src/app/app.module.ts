@@ -20,7 +20,7 @@ import { GroupInvitationComponent } from './group-dashboard/group-invitation/gro
 import { GroupSummaryComponent } from './group-dashboard/group-summary/group-summary.component'
 import { UserGroupBillsComponent } from './group-dashboard/user-group-bills/user-group-bills.component'
 import { LogoutComponent } from './logout/logout.component'
-
+//test
 @NgModule({
 	declarations: [
 		AppComponent,

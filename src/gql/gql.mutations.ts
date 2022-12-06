@@ -110,23 +110,6 @@ export const GET_GROUP_SUMMARY = gql`
 	}
 `
 
-export const GET_GROUP_MEMBERS = gql`
-	mutation partyGroupMembers {
-		partyGroupMembers {
-			uuid
-			name
-			email
-			payedBills {
-				uuid
-				name
-				price
-				groupUuid
-				payedBy
-			}
-		}
-	}
-`
-
 export const ADD_GROUP_MEMBER = gql`
 	mutation partyGroupAddUser($input: String!) {
 		partGroupAddUser(input: $input) {
