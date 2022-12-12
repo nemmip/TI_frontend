@@ -26,8 +26,11 @@ export class SavedContactsComponent implements OnInit {
 				mutation: GET_USER_CONTACTS,
 			})
 			.subscribe(({ data }) => {
-				const contactData = data as { contactsGetByUser: Contact[] }
-				this.contacts.push(...contactData.contactsGetByUser)
+				const contactData = data as {
+					contactsGetByUser: { savedContacts: Contact[] }
+				}
+				console.log(contactData)
+				this.contacts.push(...contactData.contactsGetByUser.savedContacts)
 			})
 	}
 
@@ -54,7 +57,7 @@ export class SavedContactsComponent implements OnInit {
 			.mutate({
 				mutation: ADD_USER_CONTACT,
 				variables: {
-					input: this.newContactEmail,
+					input: { contactEmail: this.newContactEmail },
 				},
 			})
 			.subscribe(async () => {

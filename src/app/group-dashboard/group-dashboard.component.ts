@@ -42,8 +42,10 @@ export class GroupDashboardComponent implements OnInit {
 				)
 
 				if (membersUuids) {
-					const contactData = data as { contactsGetByUser: Contact[] }
-					this.contacts = contactData.contactsGetByUser.filter(
+					const contactData = data as {
+						contactsGetByUser: { savedContacts: Contact[] }
+					}
+					this.contacts = contactData.contactsGetByUser.savedContacts.filter(
 						(contact) => !membersUuids.find((member) => member === contact.uuid)
 					)
 				}

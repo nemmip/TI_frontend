@@ -74,7 +74,13 @@
 						>creating</a
 					>
 					or
-					<a ariaCurrentWhenActive="page" class="link-success">joining</a>
+					<a
+						ariaCurrentWhenActive="page"
+						class="link-success"
+						data-bs-toggle="modal"
+						data-bs-target="#joinNewGroupModal"
+						>joining</a
+					>
 					group
 				</h5>
 			</div>
@@ -171,7 +177,7 @@
 				<label for="enterGroupCode" class="form-label"
 					>Group invitation code</label
 				>
-				<input type="number" class="form-control" [(ngModel)]="newGroupCode" />
+				<input type="text" class="form-control" [(ngModel)]="newGroupCode" />
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">

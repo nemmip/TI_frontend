@@ -26,7 +26,10 @@ export class RegisterComponent {
 					input: this.registerInput,
 				},
 			})
-			.subscribe(({ data }) => console.log(data))
-		this.isRegistred = true
+			.subscribe(({ data }) => {
+				if (data) {
+					this.isRegistred = true
+				}
+			})
 	}
 }

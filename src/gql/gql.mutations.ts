@@ -23,8 +23,10 @@ export const CREATE_USER_MUTATION = gql`
 export const GET_USER_CONTACTS = gql`
 	mutation getUserContacts {
 		contactsGetByUser {
-			uuid
-			name
+			savedContacts {
+				uuid
+				name
+			}
 		}
 	}
 `
@@ -36,7 +38,7 @@ export const DELETE_USER_CONTACT = gql`
 `
 
 export const ADD_USER_CONTACT = gql`
-	mutation contactAdd($input: String!) {
+	mutation contactAdd($input: ContactAddInput!) {
 		contactAdd(input: $input) {
 			uuid
 			name
@@ -111,8 +113,8 @@ export const GET_GROUP_SUMMARY = gql`
 `
 
 export const ADD_GROUP_MEMBER = gql`
-	mutation partyGroupAddUser($input: String!) {
-		partGroupAddUser(input: $input) {
+	mutation partyGroupAddUser($input: PartyGroupAddUserInput!) {
+		partyGroupAddUser(input: $input) {
 			uuid
 		}
 	}

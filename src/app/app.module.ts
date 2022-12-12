@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core'
+import { ErrorHandler, NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 
 import { AppRoutingModule } from './app-routing.module'
@@ -20,7 +20,9 @@ import { GroupInvitationComponent } from './group-dashboard/group-invitation/gro
 import { GroupSummaryComponent } from './group-dashboard/group-summary/group-summary.component'
 import { UserGroupBillsComponent } from './group-dashboard/user-group-bills/user-group-bills.component'
 import { LogoutComponent } from './logout/logout.component'
-//test
+import { AppErrorHandler } from './error-handler.service'
+import { ErrorDisplayComponent } from './error-display/error-display.component'
+
 @NgModule({
 	declarations: [
 		AppComponent,
@@ -36,6 +38,7 @@ import { LogoutComponent } from './logout/logout.component'
 		GroupChartComponent,
 		UserGroupBillsComponent,
 		LogoutComponent,
+		ErrorDisplayComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -45,7 +48,11 @@ import { LogoutComponent } from './logout/logout.component'
 		GraphQLModule,
 		HttpClientModule,
 	],
-	providers: [CookieService],
+	providers: [
+		CookieService,
+		{ provide: ErrorHandler, useClass: AppErrorHandler },
+		ErrorDisplayComponent,
+	],
 	bootstrap: [AppComponent],
 })
 export class AppModule {}

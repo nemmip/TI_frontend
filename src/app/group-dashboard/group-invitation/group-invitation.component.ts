@@ -30,7 +30,7 @@ export class GroupInvitationComponent {
 			.mutate({
 				mutation: ADD_GROUP_MEMBER,
 				variables: {
-					input: this.contactToAdd,
+					input: { userUuid: this.contactToAdd },
 				},
 			})
 			.subscribe(() => {
