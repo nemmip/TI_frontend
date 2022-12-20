@@ -39,7 +39,9 @@ export class SavedContactsComponent implements OnInit {
 			.mutate({
 				mutation: DELETE_USER_CONTACT,
 				variables: {
-					input: uuid,
+					input: {
+						contactUuid: uuid,
+					},
 				},
 			})
 			.subscribe(() => {

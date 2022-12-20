@@ -72,7 +72,9 @@ export class UserGroupsComponent implements OnInit {
 			.mutate({
 				mutation: DELETE_USER_GROUP,
 				variables: {
-					input: uuid,
+					input: {
+						groupUuid: uuid,
+					},
 				},
 			})
 			.subscribe(() => {

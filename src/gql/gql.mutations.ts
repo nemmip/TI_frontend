@@ -32,7 +32,7 @@ export const GET_USER_CONTACTS = gql`
 `
 
 export const DELETE_USER_CONTACT = gql`
-	mutation contactDelete($input: String!) {
+	mutation contactDelete($input: ContactDeleteInput!) {
 		contactDelete(input: $input)
 	}
 `
@@ -72,7 +72,7 @@ export const CREATE_USER_GROUP = gql`
 `
 
 export const DELETE_USER_GROUP = gql`
-	mutation partyGroupDelete($input: String!) {
+	mutation partyGroupDelete($input: PartyGroupDeleteInput!) {
 		partyGroupDelete(input: $input)
 	}
 `
